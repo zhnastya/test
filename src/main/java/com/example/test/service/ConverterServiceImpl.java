@@ -14,7 +14,7 @@ public class ConverterServiceImpl implements ConverterService {
 
     @Override
     public Map<Character, Long> getSortMap(String text) {
-        if (text == null||text.isEmpty()) throw new ValidationExeption("Строка не может быть пустой");
+        if (text == null || text.isEmpty()) throw new ValidationExeption("Строка не может быть пустой");
         Map<Character, Long> collection = new LinkedHashMap<>();
         getMapFromString(text.toLowerCase()).entrySet()
                 .stream()
@@ -24,12 +24,11 @@ public class ConverterServiceImpl implements ConverterService {
     }
 
     private Map<Character, Long> getMapFromString(String text) {
-        if (text.isEmpty()) throw new ValidationExeption("Строка пуста");
         Pattern pattern = Pattern.compile("^[A-zА-яЁё]+$");
         List<Character> myListOfCharacters = IntStream
                 .range(0, text.toCharArray().length)
                 .mapToObj(i -> text.toCharArray()[i])
-                .filter(s-> pattern.matcher(s.toString()).matches())
+                .filter(s -> pattern.matcher(s.toString()).matches())
                 .collect(Collectors.toList());
         return myListOfCharacters.stream()
                 .collect(
